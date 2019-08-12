@@ -1,0 +1,23 @@
+#!/bin/sh
+
+#compile
+g++ -std=c++0x main.cpp
+
+#run code
+./a.out
+
+#overwrite some files
+cp -i 0/qo.orig 0/qo 
+y
+cp -i 0/qw.orig 0/qw 
+y
+# blockMesh
+blockMesh
+
+#setFields
+setFields
+
+IMPESFoam
+
+#View mesh
+paraFoam

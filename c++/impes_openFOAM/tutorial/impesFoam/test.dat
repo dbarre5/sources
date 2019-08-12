@@ -1,0 +1,31 @@
+GRID
+100 100 1
+
+PERM
+1000
+
+DXYZ
+10 10 1
+
+POR
+0.15
+
+PINITIAL
+5000
+
+ENDTIME
+100
+
+NT
+100
+
+CONV
+2
+
+WellInfo: Specified as block 1, block 2, block 3, injection rate
+INJ 
+50 50 1 5
+
+PROD
+50 100 1 0
+

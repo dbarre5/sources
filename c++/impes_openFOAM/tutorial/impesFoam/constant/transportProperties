@@ -1,0 +1,65 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      transportProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+DT              DT [0 2 -1 0 0 0 0] 4e-02;
+
+
+/*transportModel  Newtonian;*/
+
+/*Fluid Properties*/
+nuOil			nuOil [ 1 -1 -1 0 0 0 0 ] 0.2;
+rhoOil			rhoOil [1 -3 0 0 0 0 0 ] 900;
+
+nuWater			nuWater [ 1 -1 -1 0 0 0 0 ] 1;
+rhoWater		rhoWater [1 -3 0 0 0 0 0 ] 1000;
+
+nuAir			nuAir [ 1 -1 -1 0 0 0 0 ] 1.48e-05;
+rhoAir			rhoAir [1 -3 0 0 0 0 0 ] 1;
+
+sigma			sigma [1 1 -2 0 0 0 0 ] 0.07;
+
+ct			ct [ -1 1 2 0 0 0 0 ] 0.000001;
+
+
+/*Rel Perm Properties*/
+/*Coefficients for calculation of rel perm*/
+krwMax			krwMax [ 0 0 0 0 0 0 0 ] 0.74;
+krwCoefA		krwCoefA [ 0 0 0 0 0 0 0 ] 2.14;
+Swr			Swr [ 0 0 0 0 0 0 0 ] 0.36;
+
+kroMax			kroMax [ 0 0 0 0 0 0 0 ] 1;
+kroCoefA		kroCoefA [ 0 0 0 0 0 0 0 ] 2.2;
+Sor			Sor [ 0 0 0 0 0 0 0 ] 0.2;
+
+
+/*Rock Properties*/
+perm			perm [ 0 2 0 0 0 0 0 ] 1000;
+porosity		porosity [ 0 0 0 0 0 0 0 ] 0.15;
+
+
+mult1			mult1 [ 0 0 0 0 0 0 0 ] .000609311;
+mult2			mult2 [ 0 0 0 0 0 0 0 ] .000609311; /*.000609311*/
+
+/*Coefficients for Capillary Pressure Calculation from Saturation*/
+CoefA			CoefA [ 1 -1 -2 0 0 0 0 ] 0.1;
+CoefB			CoefB [ 0 0 0 0 0 0 0 ] -3;
+
+/*Dimension Multiplier*/
+Vol			Vol [ 0 0 1 0 0 0 0 ] 1;
+
+
+// ************************************************************************* //

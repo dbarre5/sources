@@ -1,0 +1,94 @@
+    Info<< "Reading field P\n" << endl;
+
+    volScalarField P
+    (
+        IOobject
+        (
+            "P",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+    Info<< "Reading field q\n" << endl;
+    volScalarField q
+    (
+        IOobject
+        (
+            "q",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    ); 
+
+    Info<< "Reading transportProperties\n" << endl;
+
+    IOdictionary transportProperties
+    (
+        IOobject
+        (
+            "transportProperties",
+            runTime.constant(),
+            mesh,
+            IOobject::MUST_READ_IF_MODIFIED,
+            IOobject::NO_WRITE
+        )
+    );
+
+
+    Info<< "Reading diffusivity DT\n" << endl;
+
+    dimensionedScalar DT
+    (
+        transportProperties.lookup("DT")
+    );
+
+    dimensionedScalar nuOil
+    (
+        transportProperties.lookup("nuOil")
+    );
+
+    dimensionedScalar rhoOil
+    (
+        transportProperties.lookup("rhoOil")
+    );
+    
+    dimensionedScalar nuWater
+    (
+        transportProperties.lookup("nuWater")
+    );
+
+    dimensionedScalar rhoWater
+    (
+        transportProperties.lookup("rhoWater")
+    );
+
+
+    dimensionedScalar nuAir
+    (
+        transportProperties.lookup("nuAir")
+    );
+
+    dimensionedScalar rhoAir
+    (
+        transportProperties.lookup("rhoAir")
+    );
+   
+    dimensionedScalar perm
+    (
+        transportProperties.lookup("perm")
+    );
+
+    dimensionedScalar compressibility
+    (
+        transportProperties.lookup("compressibility")
+    );
+
+
+
