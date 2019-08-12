@@ -1,0 +1,289 @@
+    Info<< "Reading field P\n" << endl;
+
+    volScalarField P
+    (
+        IOobject
+        (
+            "P",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+    volScalarField Pc
+    (
+        IOobject
+        (
+            "Pc",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+    volScalarField Pw
+    (
+        IOobject
+        (
+            "Pw",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+    Info<< "Reading field q\n" << endl;
+    volScalarField qo
+    (
+        IOobject
+        (
+            "qo",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    ); 
+
+    Info<< "Reading field qw\n" << endl;
+    volScalarField qw
+    (
+        IOobject
+        (
+            "qw",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+    Info<< "Reading field Sw\n" << endl;
+    volScalarField Sw
+    (
+        IOobject
+        (
+            "Sw",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+    Info<< "Reading field krw\n" << endl;
+    volScalarField krw
+    (
+        IOobject
+        (
+            "krw",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+    Info<< "Reading field kro\n" << endl;
+    volScalarField kro
+    (
+        IOobject
+        (
+            "kro",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+    
+
+    Info<< "Reading field Uwd\n" << endl;
+    volVectorField Uwd
+    (
+        IOobject
+        (
+            "Uwd",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+
+
+    Info<< "Reading field Uod\n" << endl;
+    volVectorField Uod
+    (
+        IOobject
+        (
+            "Uod",
+            runTime.timeName(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh
+    );
+
+
+
+
+    Info<< "Reading Cell Volumes\n" << endl;
+    volScalarField cv
+    (
+            IOobject
+            (
+                    "cv",
+                    runTime.timeName(),
+                    mesh,
+                    IOobject::NO_READ,
+                    IOobject::AUTO_WRITE
+            ),
+            mesh,
+            dimensionedScalar("zero",dimVolume,0.0)
+    );
+    
+    cv.ref() = mesh.V();
+
+    Info<< "Reading transportProperties\n" << endl;
+    IOdictionary transportProperties
+    (
+        IOobject
+        (
+            "transportProperties",
+            runTime.constant(),
+            mesh,
+            IOobject::MUST_READ_IF_MODIFIED,
+            IOobject::NO_WRITE
+        )
+    );
+
+/*creates flux field to know upwinding direction for kro*/
+    #include "createPhio.H"
+
+/*creates flux field to know upwinding direction for krw*/
+    #include "createPhiw.H"
+
+
+    Info<< "Reading diffusivity DT\n" << endl;
+
+    dimensionedScalar DT
+    (
+        transportProperties.lookup("DT")
+    );
+
+    dimensionedScalar nuOil
+    (
+        transportProperties.lookup("nuOil")
+    );
+
+    dimensionedScalar rhoOil
+    (
+        transportProperties.lookup("rhoOil")
+    );
+    
+    dimensionedScalar nuWater
+    (
+        transportProperties.lookup("nuWater")
+    );
+
+    dimensionedScalar rhoWater
+    (
+        transportProperties.lookup("rhoWater")
+    );
+
+
+    dimensionedScalar nuAir
+    (
+        transportProperties.lookup("nuAir")
+    );
+
+    dimensionedScalar rhoAir
+    (
+        transportProperties.lookup("rhoAir")
+    );
+   
+    dimensionedScalar perm
+    (
+        transportProperties.lookup("perm")
+    );
+
+    dimensionedScalar ct
+    (
+        transportProperties.lookup("ct")
+    );
+
+    dimensionedScalar por
+    (
+        transportProperties.lookup("porosity")
+    );
+
+    dimensionedScalar krwMax
+    (
+        transportProperties.lookup("krwMax")
+    );
+
+    dimensionedScalar krwCoefA
+    (
+        transportProperties.lookup("krwCoefA")
+    );
+
+    dimensionedScalar Swr
+    (
+        transportProperties.lookup("Swr")
+    );
+
+    dimensionedScalar kroMax
+    (
+        transportProperties.lookup("kroMax")
+    );
+
+    dimensionedScalar kroCoefA
+    (
+        transportProperties.lookup("kroCoefA")
+    );
+
+    dimensionedScalar Sor
+    (
+        transportProperties.lookup("Sor")
+    );
+
+    dimensionedScalar mult1
+    (
+        transportProperties.lookup("mult1")
+    );
+
+    dimensionedScalar mult2
+    (
+        transportProperties.lookup("mult2")
+    );
+
+    dimensionedScalar CoefA
+    (
+        transportProperties.lookup("CoefA")
+    );
+
+    dimensionedScalar CoefB
+    (
+        transportProperties.lookup("CoefB")
+    );
+
+    dimensionedScalar Vol
+    (
+        transportProperties.lookup("Vol")
+    );

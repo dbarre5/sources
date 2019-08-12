@@ -1,0 +1,5 @@
+/*give directions of velocity based on pressure*/
+
+Uwd == -fvc::grad(P)*100000;
+
+Uod == -fvc::grad(P)*100000;
