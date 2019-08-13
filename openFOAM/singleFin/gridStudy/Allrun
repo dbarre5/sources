@@ -1,0 +1,24 @@
+bx=16
+by=8
+bz=4 
+for i in {1..3}
+do
+	x=$(expr $bx*$i | bc)
+	y=$(expr $by*$i | bc)
+	z=$(expr $bz*$i | bc)
+	echo "$t"
+	cp -r baseFin baseFin$i
+
+	#Move into appropriate directory and change the thickness of each block
+	cd baseFin$i
+	blockMeshDictFin="system/fin/blockMeshDict"
+	blockMeshDictAir="system/air/blockMeshDict"
+	#Search for the base file's thickness and replace that value
+	sed s/"(25 15 10)"/"($x $y $z)"/g $blockMeshDictAir > temp.$$
+	mv temp.$$ $blockMeshDictAir
+	sed s/"(25 15 3)"/"($x $y 3)"/g $blockMeshDictFin > temp.$$
+	mv temp.$$ $blockMeshDictFin
+	./Allrun.pre
+	chtMultiRegionFoam
+	cd ..
+done
